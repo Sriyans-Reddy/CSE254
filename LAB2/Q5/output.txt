@@ -1,0 +1,2 @@
+The time taken to run the program is: 0.012 sec for 10000000 elements
+The two minmas are 2 and 2

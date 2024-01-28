@@ -3,12 +3,12 @@ using namespace std;
 
 
 
-void displayMatrix(ofstream& outputFile, string label, vector<vector<int>> matrix,
-                   int startRow, int startColumn,
-                   int endRow, int endColumn) {
+void displayMatrix(ofstream& outputFile, string label, vector<vector<long long>> matrix,
+                   long long startRow, long long startColumn,
+                   long long endRow, long long endColumn) {
     outputFile << endl << label << " =>" << endl;
-    for (int i = startRow; i <= endRow; i++) {
-        for (int j = startColumn; j <= endColumn; j++) {
+    for (long long i = startRow; i <= endRow; i++) {
+        for (long long j = startColumn; j <= endColumn; j++) {
             outputFile<< matrix[i][j]<<" ";
         }
         outputFile << endl;
@@ -17,22 +17,22 @@ void displayMatrix(ofstream& outputFile, string label, vector<vector<int>> matri
     return;
 }
 
-void addMatrices(vector<vector<int>> matrixA,
-                 vector<vector<int>> matrixB,
-                 vector<vector<int>>& resultMatrix,
-                 int splitIndex) {
+void addMatrices(vector<vector<long long>> matrixA,
+                 vector<vector<long long>> matrixB,
+                 vector<vector<long long>>& resultMatrix,
+                 long long splitIndex) {
     for (auto i = 0; i < splitIndex; i++)
         for (auto j = 0; j < splitIndex; j++)
             resultMatrix[i][j]
                 = matrixA[i][j] + matrixB[i][j];
 }
 
-vector<vector<int>> multiplyMatrices(vector<vector<int>> matrixA,
-                                     vector<vector<int>> matrixB) {
-    int colsA = matrixA[0].size();
-    int rowsA = matrixA.size();
-    int colsB = matrixB[0].size();
-    int rowsB = matrixB.size();
+vector<vector<long long>> multiplyMatrices(vector<vector<long long>> matrixA,
+                                     vector<vector<long long>> matrixB) {
+    long long colsA = matrixA[0].size();
+    long long rowsA = matrixA.size();
+    long long colsB = matrixB[0].size();
+    long long rowsB = matrixB.size();
 
     if (colsA != rowsB) {
         cout << "\nError: The number of columns in Matrix "
@@ -41,28 +41,28 @@ vector<vector<int>> multiplyMatrices(vector<vector<int>> matrixA,
         return {};
     }
 
-    vector<int> resultMatrixRow(colsB, 0);
-    vector<vector<int>> resultMatrix(rowsA, resultMatrixRow);
+    vector<long long> resultMatrixRow(colsB, 0);
+    vector<vector<long long>> resultMatrix(rowsA, resultMatrixRow);
 
     if (colsA == 1)
         resultMatrix[0][0] = matrixA[0][0] * matrixB[0][0];
     else {
-        int splitIndex = colsA / 2;
+        long long splitIndex = colsA / 2;
 
-        vector<int> rowVector(splitIndex, 0);
-        vector<vector<int>> resultMatrix00(splitIndex, rowVector);
-        vector<vector<int>> resultMatrix01(splitIndex, rowVector);
-        vector<vector<int>> resultMatrix10(splitIndex, rowVector);
-        vector<vector<int>> resultMatrix11(splitIndex, rowVector);
+        vector<long long> rowVector(splitIndex, 0);
+        vector<vector<long long>> resultMatrix00(splitIndex, rowVector);
+        vector<vector<long long>> resultMatrix01(splitIndex, rowVector);
+        vector<vector<long long>> resultMatrix10(splitIndex, rowVector);
+        vector<vector<long long>> resultMatrix11(splitIndex, rowVector);
 
-        vector<vector<int>> a00(splitIndex, rowVector);
-        vector<vector<int>> a01(splitIndex, rowVector);
-        vector<vector<int>> a10(splitIndex, rowVector);
-        vector<vector<int>> a11(splitIndex, rowVector);
-        vector<vector<int>> b00(splitIndex, rowVector);
-        vector<vector<int>> b01(splitIndex, rowVector);
-        vector<vector<int>> b10(splitIndex, rowVector);
-        vector<vector<int>> b11(splitIndex, rowVector);
+        vector<vector<long long>> a00(splitIndex, rowVector);
+        vector<vector<long long>> a01(splitIndex, rowVector);
+        vector<vector<long long>> a10(splitIndex, rowVector);
+        vector<vector<long long>> a11(splitIndex, rowVector);
+        vector<vector<long long>> b00(splitIndex, rowVector);
+        vector<vector<long long>> b01(splitIndex, rowVector);
+        vector<vector<long long>> b10(splitIndex, rowVector);
+        vector<vector<long long>> b11(splitIndex, rowVector);
 
         for (auto i = 0; i < splitIndex; i++)
             for (auto j = 0; j < splitIndex; j++) {
@@ -124,23 +124,23 @@ int main() {
         cerr << "Error opening the output file" << endl;
         return 1;
     }
-    int n;
+    long long n;
     inputFile >> n;
 
-    vector<vector<int>> matrixA, matrixB;
-    int value;
-    for (int i = 0; i < n; i++) {
-        vector<int> row;
-        for (int j = 0; j < n; j++) {
+    vector<vector<long long>> matrixA, matrixB;
+    long long value;
+    for (long long i = 0; i < n; i++) {
+        vector<long long> row;
+        for (long long j = 0; j < n; j++) {
             inputFile >> value;
             row.push_back(value);
         }
         matrixA.push_back(row);
     }
 
-    for (int i = 0; i < n; i++) {
-        vector<int> row;
-        for (int j = 0; j < n; j++) {
+    for (long long i = 0; i < n; i++) {
+        vector<long long> row;
+        for (long long j = 0; j < n; j++) {
             inputFile >> value;
             row.push_back(value);
         }
@@ -148,10 +148,10 @@ int main() {
     }
     inputFile.close();
 
-    displayMatrix(outputFile, "Array A", matrixA, 0, 0, n - 1, n - 1);
-    displayMatrix(outputFile, "Array B", matrixB, 0, 0, n - 1, n - 1);
+    // displayMatrix(outputFile, "Array A", matrixA, 0, 0, n - 1, n - 1);
+    // displayMatrix(outputFile, "Array B", matrixB, 0, 0, n - 1, n - 1);
 
-    vector<vector<int>> resultMatrix(multiplyMatrices(matrixA, matrixB));
+    vector<vector<long long>> resultMatrix(multiplyMatrices(matrixA, matrixB));
 
     displayMatrix(outputFile, "Result Array", resultMatrix, 0, 0, n - 1, n - 1);
 

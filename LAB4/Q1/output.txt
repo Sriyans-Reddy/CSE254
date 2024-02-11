@@ -1,1 +1,1 @@
-Number of Inversions : 579209593
+Number of Inversions : 1

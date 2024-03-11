@@ -28,7 +28,7 @@ vector<int> topological_sort(){
 }
 
 void rdfs(int s){
-    rvis[s] = 1; cout << s << " ";
+    rvis[s] = 1; cout << s+1 << " ";
     for(auto x:radj[s])
         if(!rvis[x])
             rdfs(x);

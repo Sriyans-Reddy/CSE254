@@ -1,0 +1,2 @@
+Greedy: 35
+Dynamic Approach: 37

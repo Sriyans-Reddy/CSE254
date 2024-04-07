@@ -1,7 +1,4 @@
 #include<bits/stdc++.h>
-// #include<iostream>
-// #include<map>
-// #include<vector>
 using namespace std;
 
 void greedy(vector<double> &val,vector<double> &wts,int lim,int n){
@@ -28,7 +25,6 @@ int knapSack(int W, int wt[], int val[], int n)
     int i, w; 
     vector<vector<int> > K(n + 1, vector<int>(W + 1)); 
   
-    // Build table K[][] in bottom up manner 
     for (i = 0; i <= n; i++) { 
         for (w = 0; w <= W; w++) { 
             if (i == 0 || w == 0) 

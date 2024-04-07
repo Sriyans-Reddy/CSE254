@@ -1,2 +1,2 @@
-Greedy: c a 
-60
+Greedy: c d f g h 
+290
